@@ -16,7 +16,7 @@ class Matrix{
 	randomize(){
 		for (let i = 0; i < this.rows; i++) {
 			for (let j = 0; j < this.columns; j++) {
-				this.data[i][j] = Math.floor(Math.random()*10);
+				this.data[i][j] = Math.random()*2 - 1;
 			}
 		}
 	}
@@ -25,7 +25,7 @@ class Matrix{
 		if(n instanceof Matrix){
 			for (let i = 0; i < this.rows; i++) {
 				for (let j = 0; j < this.columns; j++) {
-					this.data[i][j] += n.matrix[i][j];
+					this.data[i][j] += n.data[i][j];
 				}
 			}
 		}else{
@@ -58,6 +58,24 @@ class Matrix{
 			return result;
 		}
 		return undefined;
+	}
+
+	static fromArray(arr){
+		let result = new Matrix(arr.length,1);
+		for (var i = 0; i < arr.length; i++) {
+			result.data[i][0] = arr[i];
+		}
+		return result;
+	}
+
+	toArray(){
+		let arr = [];
+		for (let i = 0; i < this.rows; i++) {
+			for (let j = 0; j < this.columns; j++) {
+				arr.push(this.data[i][j]);
+			}
+		}
+		return arr;
 	}
 
 	map(func){
