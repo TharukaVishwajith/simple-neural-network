@@ -36,6 +36,15 @@ class Matrix{
 			}
 		}
 	}
+	static subtract(a,b){
+		let result = new Matrix(a.rows, a.columns);
+		for (let i = 0; i < result.rows; i++) {
+			for (let j = 0; j < result.columns; j++) {
+				result.data[i][j] = a.data[i][j] - b.data[i][j];
+			}
+		}
+		return result;
+	}
 
 	static matrixMultiply(m1,m2){
 		if(m1 instanceof Matrix && m2 instanceof Matrix){
@@ -115,11 +124,11 @@ class Matrix{
 		}
 	}
 
-	transpose(){
-		let result = new Matrix(this.columns,this.rows);
+	static transpose(matrix){
+		let result = new Matrix(matrix.columns,matrix.rows);
 		for (let i = 0; i < result.rows; i++) {
 			for (let j = 0; j < result.columns; j++) {
-				result.data[i][j] = this.data[j][i];
+				result.data[i][j] = matrix.data[j][i];
 			}
 		}
 		return result;

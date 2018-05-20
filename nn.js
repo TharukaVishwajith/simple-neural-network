@@ -25,15 +25,31 @@ class NeuralNetwork{
 		let inputs = Matrix.fromArray(input_array);
 		let hidden = Matrix.matrixMultiply(this.weights_ih,inputs);
 		hidden.add(this.bias_h);
-
-		// activation function
-		hidden.map(sigmoid);
+		hidden.map(sigmoid); // activation function
 
 		// generaing output's output
 		let output = Matrix.matrixMultiply(this.weights_ho,hidden);
 		output.add(this.bias_o);
-		output.map(sigmoid);
+		output.map(sigmoid); // activation function
 
-		return output.toArray();
+		return output.toArray(); 
+	}
+
+	train(inputs,targets){
+		let outputs = this.feedforward(inputs);
+		outputs = Matrix.fromArray(outputs);
+		targets = Matrix.fromArray(targets);
+
+		let output_errors = Matrix.subtract(targets,outputs);
+
+		let weights_ho_t = Matrix.transpose(this.weights_ho);
+
+		let hidden_errors = Matrix.matrixMultiply(weights_ho_t,output_errors);
+
+		hidden_errors.print();
+		// outputs.print();
+		// targets.print();
+		// output_errors.print();
+
 	}
 }
